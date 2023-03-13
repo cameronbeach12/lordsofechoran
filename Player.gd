@@ -48,6 +48,7 @@ var target = position #target movement position
 
 #animator
 @onready var animator = $AnimatedSprite2D #sprite animation
+@onready var devView = $Camera2D/RichTextLabel
 
 #Strings
 var suffix = "" #class suffix
@@ -117,6 +118,15 @@ func CooldownManagement(t):
 			pass
 
 func _physics_process(delta):
+	devView.text = "Q Cooldown = " + str(int(cooldowns[0]))\
+	+ "\nW Cooldown = " + str(int(cooldowns[1]))\
+	+ "\nE Cooldown = " + str(int(cooldowns[2]))\
+	+ "\nA Cooldown = " + str(int(cooldowns[3]))\
+	+ "\nS Cooldown = " + str(int(cooldowns[4]))\
+	+ "\nD Cooldown = " + str(int(cooldowns[5]))\
+	+ "\nDash Cooldown = " + str(int(cooldowns[6]))\
+	+ "\nState = " + str(_state)
+	
 	#manage cooldowns
 	CooldownManagement(delta)
 	
@@ -134,18 +144,16 @@ func _physics_process(delta):
 		#Lots of animation stuff
 		for i in range(6):
 			if cooldowns[i] <= 0:
-				if Input.is_action_just_pressed("skill" + str(i + 1)) and _state != STATE.CASTING:
-					cooldowns[i] = max_cooldowns[i]
-					animator.play("skill_" + str(i+1) + suffix)
-					target = position
-					_state = STATE.CASTING
-		for i in range(6):
-			if cooldowns[i] <= 0:
 				if Input.is_action_just_pressed("skill" + str(i + 1)) and _state == STATE.CASTING:
 					if queue.is_empty():
 						queue.append("skill_" + str(i+1))
 					else:
 						queue.insert(0, "skill_" + str(i+1))
+				if Input.is_action_just_pressed("skill" + str(i + 1)) and _state != STATE.CASTING:
+					cooldowns[i] = max_cooldowns[i]
+					animator.play("skill_" + str(i+1) + suffix)
+					target = position
+					_state = STATE.CASTING
 	#dashing
 	if Input.is_action_just_pressed("dash") and cooldowns[6] <= 0:
 		_state = STATE.DASHING
