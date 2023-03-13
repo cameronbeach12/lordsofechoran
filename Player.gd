@@ -48,7 +48,7 @@ var target = position #target movement position
 
 #animator
 @onready var animator = $AnimatedSprite2D #sprite animation
-@onready var devView = $Camera2D/RichTextLabel
+@onready var devView = $Camera2D/DevText
 
 #Strings
 var suffix = "" #class suffix

@@ -580,7 +580,7 @@ centered = false
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Camera2D"]
+[node name="DevText" type="RichTextLabel" parent="Camera2D"]
 offset_left = -288.0
 offset_top = -162.0
 offset_right = -137.0
