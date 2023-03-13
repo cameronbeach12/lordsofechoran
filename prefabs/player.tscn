@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://Player.gd" id="1_2lhfx"]
 [ext_resource type="Texture2D" uid="uid://xmlf6epyj871" path="res://sprites/BODY_male.png" id="2_a50ek"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gn5iy"]
-size = Vector2(12, 22)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6np5a"]
+radius = 5.5
+height = 22.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_en8oj"]
 atlas = ExtResource("2_a50ek")
@@ -567,12 +568,12 @@ script = ExtResource("1_2lhfx")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)
 scale = Vector2(2, 2)
-shape = SubResource("RectangleShape2D_gn5iy")
+shape = SubResource("CapsuleShape2D_6np5a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-32, -59)
 sprite_frames = SubResource("SpriteFrames_q1bit")
-animation = &"dash"
+animation = &"skill_6_GS"
 speed_scale = 2.0
 centered = false
 
