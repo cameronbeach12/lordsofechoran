@@ -28,26 +28,37 @@ enum CLASS {
 
 #QUEUE INTERRUPT PRIORITY - DASH, MOVEMENT, SKILL
 #DASHING CLEARS THE QUEUE
-var _class = CLASS.GUNSLINGER
-var _damage_type = DAMAGE_TYPE.DEFAULT
-var _state = STATE.IDLE
 
+#Enums
+var _class = CLASS.GUNSLINGER #class type
+var _damage_type = DAMAGE_TYPE.DEFAULT #damage type
+var _state = STATE.IDLE #current player state
+
+#Arrays
 var cooldowns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #1-6 skills, 7 dash
-var max_cooldowns = [20.0, 17.5, 15.0, 12.5, 10.0, 7.5, 10.0]
-var queue = []
+var max_cooldowns = [20.0, 17.5, 15.0, 12.5, 10.0, 7.5, 10.0] # maximum cooldowns for all skills
+var queue = [] #action queue
 
-const SPEED = 150.0
-const DASH_MULT = 2.25
+#Floats
+const SPEED = 150.0 #Movement Speed
+const DASH_MULT = 2.25 #Dash movement speed multiplier
 
-var target = position
-var prev_velocity = Vector2()
+#vectors
+var target = position #target movement position
 
-@onready var animator = $AnimatedSprite2D
-var suffix = ""
-var actions = true
+#animator
+@onready var animator = $AnimatedSprite2D #sprite animation
+
+#Strings
+var suffix = "" #class suffix
+
+#Bools
+var actions = true #able to do actions yes/no
+
+#Unassigned
 var dash_direction
 
-
+#set suffix among other creation items
 func _ready():	
 	if _class == CLASS.GUNSLINGER:
 		suffix = "_GS"
@@ -62,6 +73,7 @@ func _ready():
 	else:
 		print("CLASS IS DEFAULT -> ANIMATION NOT VALID")
 
+#action animation handler
 func animation():
 	if _state == STATE.IDLE:
 		animator.play("idle_down")
@@ -74,28 +86,30 @@ func animation():
 func CheckSpellAnim():
 	var spell = 0
 	
+	#loop through skills
 	for i in range(6):
 		if animator.animation == "skill_" + str(i+1) + suffix:
 			_state = STATE.IDLE
-			
+	
+	#check for end of dash
 	if animator.animation == "dash":
 		_state = STATE.IDLE
 		target = position
 		cooldowns[6] = max_cooldowns[6]
 		actions = true
-		
-	if !queue.is_empty() and _class == CLASS.GUNSLINGER:
+	
+	#check the action queue
+	if !queue.is_empty():
 		if queue[0] != "movement":
 			if queue[0].left(5) == "skill":
 				spell = int(queue[0][6])
 				cooldowns[spell-1] = max_cooldowns[spell-1]
 				_state = STATE.CASTING
-				animator.play(queue[0] + "_GS")
+				animator.play(queue[0] + suffix)
 				queue.clear()
 
 func CooldownManagement(t):	
-	print(cooldowns)
-	
+	#decrease cooldowns by delta
 	for i in range(cooldowns.size()):
 		if cooldowns[i] > 0:
 			cooldowns[i] -= t
@@ -132,7 +146,7 @@ func _physics_process(delta):
 						queue.append("skill_" + str(i+1))
 					else:
 						queue.insert(0, "skill_" + str(i+1))
-			
+	#dashing
 	if Input.is_action_just_pressed("dash") and cooldowns[6] <= 0:
 		_state = STATE.DASHING
 		dash_direction = (get_global_mouse_position() - global_position).normalized()
@@ -152,7 +166,7 @@ func _physics_process(delta):
 			if _state != STATE.CASTING:
 				queue.clear()
 				move_and_slide()
-	else:
+	else: #dash movement
 		queue.clear()
 		position += SPEED*DASH_MULT*delta*dash_direction
 	
