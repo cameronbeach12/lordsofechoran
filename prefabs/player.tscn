@@ -1,6 +1,6 @@
-[gd_scene load_steps=73 format=3 uid="uid://chis7wmy6xcem"]
+[gd_scene load_steps=73 format=3 uid="uid://dkucmxoi2ssic"]
 
-[ext_resource type="Script" path="res://Player.gd" id="1_2lhfx"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_w30ex"]
 [ext_resource type="Texture2D" uid="uid://xmlf6epyj871" path="res://sprites/BODY_male.png" id="2_a50ek"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6np5a"]
@@ -356,7 +356,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_wt8ci")
 }],
 "loop": true,
-"name": &"skill_1_GS",
+"name": &"skill_1",
 "speed": 5.0
 }, {
 "frames": [{
@@ -373,7 +373,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_wnqfx")
 }],
 "loop": true,
-"name": &"skill_2_GS",
+"name": &"skill_2",
 "speed": 5.0
 }, {
 "frames": [{
@@ -390,7 +390,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_mjarx")
 }],
 "loop": true,
-"name": &"skill_3_GS",
+"name": &"skill_3",
 "speed": 5.0
 }, {
 "frames": [{
@@ -407,7 +407,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_lp6f5")
 }],
 "loop": true,
-"name": &"skill_4_GS",
+"name": &"skill_4",
 "speed": 5.0
 }, {
 "frames": [{
@@ -424,7 +424,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_ycq7y")
 }],
 "loop": true,
-"name": &"skill_5_GS",
+"name": &"skill_5",
 "speed": 5.0
 }, {
 "frames": [{
@@ -441,7 +441,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_oi5bi")
 }],
 "loop": true,
-"name": &"skill_6_GS",
+"name": &"skill_6",
 "speed": 5.0
 }, {
 "frames": [{
@@ -563,7 +563,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(387, 151)
-script = ExtResource("1_2lhfx")
+script = ExtResource("1_w30ex")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)
@@ -573,7 +573,7 @@ shape = SubResource("CapsuleShape2D_6np5a")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-32, -59)
 sprite_frames = SubResource("SpriteFrames_q1bit")
-animation = &"skill_6_GS"
+animation = &"skill_6"
 speed_scale = 2.0
 centered = false
 
@@ -585,5 +585,6 @@ offset_left = -288.0
 offset_top = -162.0
 offset_right = -137.0
 offset_bottom = 86.0
+metadata/_edit_use_anchors_ = true
 
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]
