@@ -5,6 +5,8 @@ func _init():
 	armor_id = 1
 	armor_name = "Beginner's Helmet"
 	armor_type = TYPE.HELM
+	main_stat_base = 50
+	con_stat_base = 50
 	
 	armor_calc()	
 		

@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bjwwktx6t85n1"]
+
+[ext_resource type="Script" path="res://Scripts/Archer/LightTheTorch.gd" id="1_a43qj"]
+[ext_resource type="Texture2D" uid="uid://b00fa07welo2f" path="res://sprites/Archer/LightTheTorch.png" id="2_my7f8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cmrf"]
+atlas = ExtResource("2_my7f8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qo8p"]
+atlas = ExtResource("2_my7f8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aru14"]
+atlas = ExtResource("2_my7f8")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7g6t5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cmrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qo8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aru14")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u83ay"]
+size = Vector2(18, 6)
+
+[node name="LightTheTorch" type="Area2D"]
+collision_layer = 4
+collision_mask = 6
+script = ExtResource("1_a43qj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_7g6t5")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_u83ay")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

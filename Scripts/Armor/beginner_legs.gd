@@ -5,6 +5,8 @@ func _init():
 	armor_id = 3
 	armor_name = "Beginner's Legguards"
 	armor_type = TYPE.LEGS
+	main_stat_base = 50
+	con_stat_base = 50
 	
 	armor_calc()
 		

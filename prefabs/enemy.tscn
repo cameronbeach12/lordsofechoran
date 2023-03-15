@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwvbcvq8ri2o1"]
+
+[ext_resource type="Script" path="res://Levels/Enemy.gd" id="1_ytq86"]
+[ext_resource type="PackedScene" uid="uid://bumylcyheki8w" path="res://prefabs/enemy_health_bar.tscn" id="2_bogkv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xwq8l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_phop2"]
+
+[node name="Enemy" type="CharacterBody2D"]
+position = Vector2(146, 42)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_ytq86")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_xwq8l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="Collide" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_phop2")
+
+[node name="EnemyHealthBar" parent="." instance=ExtResource("2_bogkv")]
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0

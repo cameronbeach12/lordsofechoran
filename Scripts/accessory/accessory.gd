@@ -9,8 +9,12 @@ enum TYPE {
 var acc_id:int
 var acc_name:String
 var acc_type:TYPE
-var main_stat_increase: int
-var constitution_increase: int
+var main_stat_increase: int #between 30 and 60
+var constitution_increase: int # between 50 and 65
+var main_stat_mod: float = 20
+var con_mod: float = 20
+var main_stat_base: int
+var con_stat_base: int
 var perks: Array
 var level: int
 
@@ -20,16 +24,13 @@ func upgrade():
 	acc_calc()
 		
 func acc_calc():
-	main_stat_increase = 80
-	constitution_increase = 130
+	main_stat_increase = main_stat_base
+	constitution_increase = con_stat_base
 	
-	for i in range(level - 1):
-		if level > 40:
-			main_stat_increase = main_stat_increase * 1.05
-			constitution_increase = constitution_increase * 1.05
-		elif level > 20:
-			main_stat_increase = main_stat_increase * 1.04
-			constitution_increase = constitution_increase * 1.04
-		else:
-			main_stat_increase = main_stat_increase * 1.03
-			constitution_increase = constitution_increase * 1.03
+	for i in range(level):
+		main_stat_increase *= 1 + (60.0 / (540.0 + (60.0 + (i + 1.0) * main_stat_mod)))
+		constitution_increase *= 1 + (60.0 / (540.0 + (60.0 + (i + 1.0) * con_mod)))
+	
+	print("Accessory")	
+	print(main_stat_increase)
+	print(constitution_increase)

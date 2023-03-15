@@ -6,5 +6,7 @@ func _init():
 	acc_type = TYPE.AMULET
 	perks = [swift_reload.new(), expertise.new()]
 	level = 1
+	main_stat_base = 30
+	con_stat_base = 65
 	
 	acc_calc()

@@ -88,6 +88,9 @@ var main_stat_mod: float
 var attack_power: int
 
 var spell_speed: float
+var speed_mod: float
+
+var passive_description:String
 	
 #action animation handler
 func animation():
@@ -108,18 +111,18 @@ func CheckSpellAnim():
 	for i in range(6):
 		if animator.animation == "skill_" + str(i+1):
 			_state = STATE.IDLE
-		if i == 0:
-			Skill1()
-		elif i == 1:
-			Skill2()
-		elif i == 2:
-			Skill3()
-		elif i == 3:
-			Skill4()
-		elif i == 4:
-			Skill5()
-		elif i == 5:
-			Skill6()
+			if i == 0:
+				Skill1()
+			elif i == 1:
+				Skill2()
+			elif i == 2:
+				Skill3()
+			elif i == 3:
+				Skill4()
+			elif i == 4:
+				Skill5()
+			elif i == 5:
+				Skill6()
 	
 	#check for end of dash
 	if animator.animation == "dash":
@@ -133,7 +136,7 @@ func CheckSpellAnim():
 		if queue[0] != "movement":
 			if queue[0].left(5) == "skill":
 				spell = int(queue[0][6])
-				cooldowns[spell-1] = max_cooldowns[spell-1]
+				cooldowns[spell-1] = max_cooldowns[spell-1] * (1 - cooldown_reduction)
 				_state = STATE.CASTING
 				animator.play(queue[0])
 				queue.clear()
@@ -146,7 +149,46 @@ func CooldownManagement(t):
 		else:
 			pass
 			
+func perks_management():	
+	for i in range(inventory.size()):
+		if i == 0:
+			for j in range(2):
+				if inventory[i].perks[j].p_name == "Critical Prowess":
+					critical_chance += inventory[i].perks[j].critical_modifier + (level*\
+					inventory[i].perks[j].critical_mod_increase_per_level)
+					perks_list.append(inventory[i].perks[j].p_name)
+				elif inventory[i].perks[j].p_name == "Quickened Spell":
+					spell_speed += inventory[i].perks[j].spell_speed_modifier + (level*\
+					inventory[i].perks[j].spell_speed_increase_per_level)
+					damage_mod *= inventory[i].perks[j].damage_modifier + (level*\
+					inventory[i].perks[j].damage_mod_increase_per_level)
+					perks_list.append(inventory[i].perks[j].p_name)
+		elif i >= 1 and i <= 4:
+			if inventory[i].perks.p_name == "Critical Prowess":
+				critical_chance += inventory[i].perks.critical_modifier + (level*\
+				inventory[i].perks.critical_mod_increase_per_level)
+				perks_list.append(inventory[i].perks.p_name)
+			elif inventory[i].perks.p_name == "Precise Spells":
+				critical_damage_mod += inventory[i].perks.critical_dam_modifier + (level*\
+				inventory[i].perks.critical_dam_mod_increase_per_level)
+				perks_list.append(inventory[i].perks.p_name)
+		else:
+			for j in range(2):
+				if inventory[i].perks[j].p_name == "Swift Reload":
+					cooldown_reduction += inventory[i].perks[j].cdr_modifier + (level*\
+					inventory[i].perks[j].cdr_mod_increase_per_level)
+					perks_list.append(inventory[i].perks[j].p_name)
+				elif inventory[i].perks[j].p_name == "Expertise":
+					main_stat_mod += inventory[i].perks[j].main_stat_modifier + (level*\
+					inventory[i].perks[j].main_stat_mod_increase_per_level)
+					perks_list.append(inventory[i].perks[j].p_name)
+
 func _physics_process(delta):
+	if _state == STATE.CASTING:
+		animator.speed_scale = 1.0 * spell_speed
+	else:
+		animator.speed_scale = 1.0 * speed_mod
+	
 	devView.text = "Q Cooldown = " + str(int(cooldowns[0]))\
 	+ "\nW Cooldown = " + str(int(cooldowns[1]))\
 	+ "\nE Cooldown = " + str(int(cooldowns[2]))\
@@ -179,7 +221,7 @@ func _physics_process(delta):
 					else:
 						queue.insert(0, "skill_" + str(i+1))
 				if Input.is_action_just_pressed("skill" + str(i + 1)) and _state != STATE.CASTING:
-					cooldowns[i] = max_cooldowns[i]
+					cooldowns[i] = max_cooldowns[i] * (1 - cooldown_reduction)
 					animator.play("skill_" + str(i+1))
 					target = position
 					_state = STATE.CASTING

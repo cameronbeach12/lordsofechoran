@@ -5,6 +5,8 @@ func _init():
 	armor_id = 2
 	armor_name = "Beginner's Chestplate"
 	armor_type = TYPE.CHEST
+	main_stat_base = 50
+	con_stat_base = 50
 	
 	armor_calc()
 		
