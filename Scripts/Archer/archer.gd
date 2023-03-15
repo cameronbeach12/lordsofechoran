@@ -2,6 +2,7 @@ extends "res://Scripts/Player.gd"
 
 @onready var LTT = preload("res://prefabs/light_the_torch.tscn")
 @onready var FG = preload("res://prefabs/flame_grenade.tscn")
+@onready var PA = preload("res://prefabs/piercing_arrow.tscn")
 
 #skill stuff
 var q_direction
@@ -19,13 +20,17 @@ var e_cdr_mod = 0.25
 var e_spell_speed_mod = 1.25 
 var e_duration = 5.0
 
+var a_direction
+var a_angle
+var a_damage = 400
+
 func level_up():
 	level += 1
 	
 	verify_stats()
 
 func _ready():
-	max_cooldowns = [12.0, 16.0, 8.0, 0, 0, 0, 8]
+	max_cooldowns = [12.0, 16.0, 8.0, 6.0, 0, 0, 8]
 	level = 1
 	critical_chance = 0.10
 	critical_damage_mod = 2.0
@@ -42,7 +47,7 @@ func _ready():
 	passive_description = "You are more dexterous than the others!\nGain 10% base critical strike chance and 15% increased spell speed!"
 	#this will eventually be read in
 	#0 weapon 1 helm 2 chest 3 legs 4 feet 5 acc1 6 acc2 7 acc3
-	inventory = [beginners_bow.new(), beginners_helm.new(), beginners_chest.new(), beginners_legs.new(),\
+	inventory = [high_level_bow.new(), beginners_helm.new(), beginners_chest.new(), beginners_legs.new(),\
 	beginners_feet.new(), beginners_amulet.new(), beginners_earring.new(),beginners_ring.new()]
 	
 	verify_stats()
@@ -122,6 +127,10 @@ func _input(event):
 	if Input.is_action_just_pressed("skill2") and animator.animation != "skill_2":
 		print("yes")
 		w_target = get_global_mouse_position()
+	if Input.is_action_just_pressed("skill4") and animator.animation != "skill_4":
+		print("yes")
+		a_direction = (get_global_mouse_position() - global_position).normalized()
+		a_angle = get_global_mouse_position()
 	
 func Skill1():
 	var LTTinstance = LTT.instantiate()
@@ -166,6 +175,20 @@ func Skill3():
 	
 	print(spell_speed)
 	print(cooldown_reduction)
+	
+func Skill4():
+		var piercing_arrow = PA.instantiate()
+	
+		piercing_arrow.crit_chance = critical_chance
+		piercing_arrow.crit_damage = critical_damage_mod
+		
+		piercing_arrow.damage_calc = (attack_power * damage_mod * a_damage)
+		
+		piercing_arrow.direction = a_direction
+		piercing_arrow.global_position = global_position
+		piercing_arrow.look_at(a_angle)
+
+		get_node("/root").add_child(piercing_arrow)
 
 func e_timeout():
 	spell_speed = e_old_ss

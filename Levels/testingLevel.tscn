@@ -75,3 +75,12 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 1, 0, 0, 65537, 0, 1,
 collision_mask = 10
 
 [node name="Enemy" parent="." instance=ExtResource("3_1rxkw")]
+
+[node name="Enemy2" parent="." instance=ExtResource("3_1rxkw")]
+position = Vector2(167, 25)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_1rxkw")]
+position = Vector2(124, 61)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_1rxkw")]
+position = Vector2(188, 10)

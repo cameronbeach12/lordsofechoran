@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bovkwdmvl3lbg"]
+
+[ext_resource type="Texture2D" uid="uid://c1dat1frqksjr" path="res://sprites/Archer/piercing_arrow.png" id="1_apc30"]
+[ext_resource type="Script" path="res://Scripts/Archer/piercing_arrow.gd" id="1_wave3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vptpx"]
+size = Vector2(24, 6)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5y60h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_apc30")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="piercing arrow" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_wave3")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vptpx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_5y60h")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

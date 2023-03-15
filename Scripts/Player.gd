@@ -189,13 +189,13 @@ func _physics_process(delta):
 	else:
 		animator.speed_scale = 1.0 * speed_mod
 	
-	devView.text = "Q Cooldown = " + str(int(cooldowns[0]))\
-	+ "\nW Cooldown = " + str(int(cooldowns[1]))\
-	+ "\nE Cooldown = " + str(int(cooldowns[2]))\
-	+ "\nA Cooldown = " + str(int(cooldowns[3]))\
-	+ "\nS Cooldown = " + str(int(cooldowns[4]))\
-	+ "\nD Cooldown = " + str(int(cooldowns[5]))\
-	+ "\nDash Cooldown = " + str(int(cooldowns[6]))\
+	devView.text = "Q Cooldown = %.1f" % cooldowns[0]\
+	+ "\nW Cooldown = %.1f" % cooldowns[1]\
+	+ "\nE Cooldown = %.1f" % cooldowns[2]\
+	+ "\nA Cooldown = %.1f" % cooldowns[3]\
+	+ "\nS Cooldown = %.1f" % cooldowns[4]\
+	+ "\nD Cooldown = %.1f" % cooldowns[5]\
+	+ "\nDash Cooldown = %.1f" % cooldowns[6]\
 	+ "\nState = " + str(_state)
 	
 	#manage cooldowns
