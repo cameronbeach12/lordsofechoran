@@ -3,6 +3,7 @@ extends "res://Scripts/Player.gd"
 @onready var LTT = preload("res://prefabs/light_the_torch.tscn")
 @onready var FG = preload("res://prefabs/flame_grenade.tscn")
 @onready var PA = preload("res://prefabs/piercing_arrow.tscn")
+@onready var RU = preload("res://prefabs/ready_up.tscn")
 
 #skill stuff
 var q_direction
@@ -24,13 +25,21 @@ var a_direction
 var a_angle
 var a_damage = 400
 
+var s_global_timer
+var s_old_atpmod
+var s_atp_mod = 1.40
+var s_duration = 3.0
+var s_direction
+var s_angle
+var s_damage = 600
+
 func level_up():
 	level += 1
 	
 	verify_stats()
 
 func _ready():
-	max_cooldowns = [12.0, 16.0, 8.0, 6.0, 0, 0, 8]
+	max_cooldowns = [12.0, 16.0, 8.0, 6.0, 8.0, 0, 8]
 	level = 1
 	critical_chance = 0.10
 	critical_damage_mod = 2.0
@@ -131,6 +140,10 @@ func _input(event):
 		print("yes")
 		a_direction = (get_global_mouse_position() - global_position).normalized()
 		a_angle = get_global_mouse_position()
+	if Input.is_action_just_pressed("skill5") and animator.animation != "skill_5":
+		print("yes")
+		s_direction = (get_global_mouse_position() - global_position).normalized()
+		s_angle = get_global_mouse_position()
 	
 func Skill1():
 	var LTTinstance = LTT.instantiate()
@@ -177,18 +190,41 @@ func Skill3():
 	print(cooldown_reduction)
 	
 func Skill4():
-		var piercing_arrow = PA.instantiate()
-	
-		piercing_arrow.crit_chance = critical_chance
-		piercing_arrow.crit_damage = critical_damage_mod
-		
-		piercing_arrow.damage_calc = (attack_power * damage_mod * a_damage)
-		
-		piercing_arrow.direction = a_direction
-		piercing_arrow.global_position = global_position
-		piercing_arrow.look_at(a_angle)
+	var piercing_arrow = PA.instantiate()
 
-		get_node("/root").add_child(piercing_arrow)
+	piercing_arrow.crit_chance = critical_chance
+	piercing_arrow.crit_damage = critical_damage_mod
+	
+	piercing_arrow.damage_calc = (attack_power * damage_mod * a_damage)
+	
+	piercing_arrow.direction = a_direction
+	piercing_arrow.global_position = global_position
+	piercing_arrow.look_at(a_angle)
+
+	get_node("/root").add_child(piercing_arrow)
+		
+func Skill5():
+	s_global_timer = Timer.new()
+	s_global_timer.wait_time = s_duration
+	s_global_timer.autostart = true
+	add_child(s_global_timer)
+	s_global_timer.connect("timeout", s_timeout)
+	
+	var ready_up = RU.instantiate()
+	
+	s_old_atpmod = attack_power
+	
+	attack_power *= s_atp_mod
+	ready_up.crit_chance = critical_chance
+	ready_up.crit_damage = critical_damage_mod
+	
+	ready_up.damage_calc = (attack_power * damage_mod * a_damage)
+	
+	ready_up.direction = s_direction
+	ready_up.global_position = global_position
+	ready_up.look_at(s_angle)
+
+	get_node("/root").add_child(ready_up)
 
 func e_timeout():
 	spell_speed = e_old_ss
@@ -198,6 +234,13 @@ func e_timeout():
 	
 	print(spell_speed)
 	print(cooldown_reduction)
+	
+func s_timeout():
+	attack_power = s_old_atpmod
+	
+	s_global_timer.queue_free()
+	
+	print(attack_power)
 
 #at the end of an animation, check to see if the animation was a spell
 func _on_animated_sprite_2d_animation_looped():
