@@ -8,6 +8,12 @@ enum STATE {
 	DASHING
 }
 
+enum FACING {
+	DEFAULT,
+	LEFT,
+	RIGHT
+}
+
 enum CLASS {
 	DEFAULT,
 	BERSERKER,
