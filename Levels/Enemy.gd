@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var max_health = 300000000
+var max_health = 2000000000
 var health = max_health
 var time_alive: float
 var can_accumulate: bool = false

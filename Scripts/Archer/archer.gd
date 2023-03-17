@@ -8,12 +8,12 @@ extends "res://Scripts/Player.gd"
 #skill stuff
 var q_direction
 var q_angle
-var q_damage = 700
+var q_damage = 1000
 
 var w_target
-var w_damage = 1000
+var w_damage = 900
 
-var e_global_timer
+var e_global_timer = Timer.new()
 var e_distance = 500
 var e_old_ss
 var e_old_cdr
@@ -23,15 +23,15 @@ var e_duration = 5.0
 
 var a_direction
 var a_angle
-var a_damage = 400
+var a_damage = 600
 
-var s_global_timer
-var s_old_atpmod
-var s_atp_mod = 1.40
+var s_global_timer = Timer.new()
 var s_duration = 3.0
+var s_old_atpmod
+var s_atp_mod = 1.20
 var s_direction
 var s_angle
-var s_damage = 600
+var s_damage = 400
 
 func level_up():
 	level += 1
@@ -48,7 +48,7 @@ func _ready():
 	perks_list = []
 	con_mod = 0.8
 	max_con_mod = 4.2
-	cooldown_reduction = 0.0
+	cooldown_reduction = 0.00
 	main_stat_mod = 1.0
 	speed_mod = 1.0
 	damage_stat = DAMAGE_STAT.DEXTERITY
@@ -56,8 +56,21 @@ func _ready():
 	passive_description = "You are more dexterous than the others!\nGain 10% base critical strike chance and 15% increased spell speed!"
 	#this will eventually be read in
 	#0 weapon 1 helm 2 chest 3 legs 4 feet 5 acc1 6 acc2 7 acc3
-	inventory = [high_level_bow.new(), beginners_helm.new(), beginners_chest.new(), beginners_legs.new(),\
-	beginners_feet.new(), beginners_amulet.new(), beginners_earring.new(),beginners_ring.new()]
+	#inventory = [beginners_bow.new(), beginners_helm.new(), beginners_chest.new(), beginners_legs.new(),\
+	#beginners_feet.new(), beginners_amulet.new(), beginners_earring.new(),beginners_ring.new()]
+	
+	e_global_timer.wait_time = s_duration
+	e_global_timer.autostart = false
+	add_child(e_global_timer)
+	e_global_timer.connect("timeout", e_timeout)
+	
+	s_global_timer.wait_time = s_duration
+	s_global_timer.autostart = false
+	add_child(s_global_timer)
+	s_global_timer.connect("timeout", s_timeout)
+	
+	inventory = [high_level_bow.new(), high_level_helm.new(), high_level_chest.new(), high_level_legs.new(),\
+	high_level_feet.new(), high_level_amulet.new(), high_level_earring.new(),high_level_ring.new()]
 	
 	verify_stats()
 	
@@ -110,7 +123,14 @@ func verify_stats():
 	+ inventory[7].main_stat_increase) * main_stat_mod
 
 	attack_power = inventory[0].weapon_quality * sqrt(main_stat) / 10
+	
+	e_old_cdr = cooldown_reduction
+	e_old_ss = spell_speed
+	s_old_atpmod = attack_power
+	
 	SPEED = SPEED * speed_mod
+	
+	CDR_Check()
 	
 	print("Level: " + str(level))
 	print("Constitution: " + str(constitution))
@@ -174,17 +194,18 @@ func Skill2():
 	get_node("/root").add_child(FGinstance)
 	
 func Skill3():
-	e_global_timer = Timer.new()
-	e_global_timer.wait_time = e_duration
-	e_global_timer.autostart = true
-	add_child(e_global_timer)
-	e_global_timer.connect("timeout", e_timeout)
+	e_global_timer.start()
+	
+	spell_speed = e_old_ss
+	cooldown_reduction = e_old_cdr
 	
 	e_old_ss = spell_speed
 	e_old_cdr = cooldown_reduction
 	
 	spell_speed = spell_speed * e_spell_speed_mod
 	cooldown_reduction = cooldown_reduction + e_cdr_mod
+	
+	CDR_Check()
 	
 	print(spell_speed)
 	print(cooldown_reduction)
@@ -204,13 +225,11 @@ func Skill4():
 	get_node("/root").add_child(piercing_arrow)
 		
 func Skill5():
-	s_global_timer = Timer.new()
-	s_global_timer.wait_time = s_duration
-	s_global_timer.autostart = true
-	add_child(s_global_timer)
-	s_global_timer.connect("timeout", s_timeout)
+	s_global_timer.start()
 	
 	var ready_up = RU.instantiate()
+	
+	attack_power = s_old_atpmod
 	
 	s_old_atpmod = attack_power
 	
@@ -230,7 +249,7 @@ func e_timeout():
 	spell_speed = e_old_ss
 	cooldown_reduction = e_old_cdr
 	
-	e_global_timer.queue_free()
+	e_global_timer.stop()
 	
 	print(spell_speed)
 	print(cooldown_reduction)
@@ -238,7 +257,7 @@ func e_timeout():
 func s_timeout():
 	attack_power = s_old_atpmod
 	
-	s_global_timer.queue_free()
+	s_global_timer.stop()
 	
 	print(attack_power)
 

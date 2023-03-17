@@ -24,7 +24,6 @@ func _process(delta):
 	position += SPEED*delta*direction
 	
 func on_timeout():
-	explode()
 	self.queue_free()
 	
 func explode():

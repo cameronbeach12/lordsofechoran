@@ -188,8 +188,11 @@ func perks_management():
 					main_stat_mod += inventory[i].perks[j].main_stat_modifier + (level*\
 					inventory[i].perks[j].main_stat_mod_increase_per_level)
 					perks_list.append(inventory[i].perks[j].p_name)
+func CDR_Check():			
+	if cooldown_reduction > 0.60:
+		cooldown_reduction = 0.60
 
-func _physics_process(delta):
+func _physics_process(delta):	
 	if _state == STATE.CASTING:
 		animator.speed_scale = 1.0 * spell_speed
 	else:
