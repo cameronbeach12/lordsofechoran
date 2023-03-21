@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Armor" load_steps=3 format=3 uid="uid://qbsyfpqyixch"]
+
+[ext_resource type="Resource" uid="uid://c7x4vttpxilbg" path="res://Scripts/perks/general/critical_prowess.tres" id="1_6fwdf"]
+[ext_resource type="Script" path="res://Scripts/Resources/armor.gd" id="1_rc01y"]
+
+[resource]
+script = ExtResource("1_rc01y")
+_id = 0
+_name = "Beginner's Helmet"
+armor_type = 0
+main_stat_base = 50
+con_stat_base = 50
+perks = ExtResource("1_6fwdf")

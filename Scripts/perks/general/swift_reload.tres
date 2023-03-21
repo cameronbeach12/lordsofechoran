@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="perk" load_steps=2 format=3 uid="uid://dsxnfayni25qc"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/perk.gd" id="1_f3i3x"]
+
+[resource]
+script = ExtResource("1_f3i3x")
+_name = ""
+p_description = "Increase Cooldown Reduction by 2-10% based on character level, this perk can stack.\\nAccessory Exclusive"
+damage_modifier = 0.0
+damage_mod_increase_per_level = 0.0
+critical_dam_modifier = 0.0
+critical_dam_mod_increase_per_level = 0.0
+cdr_modifier = 0.02
+cdr_mod_increase_per_level = 0.00133
+main_stat_modifier = 0.0
+main_stat_mod_increase_per_level = 0.0
+healing_modifier = 0.0
+healing_mod_increase_per_level = 0.0
+shielding_modifier = 0.0
+shielding_mod_increase_per_level = 0.0
+critical_modifier = 0.0
+critical_mod_increase_per_level = 0.0
+spell_speed_modifier = 0.0
+spell_speed_increase_per_level = 0.0
+has_condition = false

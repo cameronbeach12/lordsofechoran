@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Accessory" load_steps=4 format=3 uid="uid://cwq1qswp5rb6r"]
+
+[ext_resource type="Resource" uid="uid://dsxnfayni25qc" path="res://Scripts/perks/general/swift_reload.tres" id="1_8h718"]
+[ext_resource type="Script" path="res://Scripts/Resources/accessory.gd" id="1_43qhm"]
+[ext_resource type="Resource" uid="uid://bvkj4fjkohxa1" path="res://Scripts/perks/general/expertise.tres" id="2_ywgci"]
+
+[resource]
+script = ExtResource("1_43qhm")
+_id = 0
+_name = "Beginner's Amulet"
+acc_type = 0
+main_stat_base = 30
+con_stat_base = 50
+perks = [ExtResource("1_8h718"), ExtResource("2_ywgci")]

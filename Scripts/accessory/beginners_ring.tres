@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Accessory" load_steps=4 format=3 uid="uid://c621jobdqdiol"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/accessory.gd" id="1_pvpwk"]
+[ext_resource type="Resource" uid="uid://dsxnfayni25qc" path="res://Scripts/perks/general/swift_reload.tres" id="1_rx87i"]
+[ext_resource type="Resource" uid="uid://bvkj4fjkohxa1" path="res://Scripts/perks/general/expertise.tres" id="2_rkv8f"]
+
+[resource]
+script = ExtResource("1_pvpwk")
+_id = 2
+_name = "Beginner's Ring"
+acc_type = 1
+main_stat_base = 30
+con_stat_base = 50
+perks = [ExtResource("1_rx87i"), ExtResource("2_rkv8f")]

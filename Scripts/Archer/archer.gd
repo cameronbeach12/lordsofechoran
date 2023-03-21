@@ -33,12 +33,23 @@ var s_direction
 var s_angle
 var s_damage = 400
 
-func level_up():
+@onready var weapon = preload("res://Scripts/Weapons/Physical/beginners_bow.tres")
+@onready var head = preload("res://Scripts/Armor/beginners_helm.tres")
+@onready var chest = preload("res://Scripts/Armor/beginners_chest.tres")
+@onready var legs = preload("res://Scripts/Armor/beginners_legs.tres")
+@onready var feet = preload("res://Scripts/Armor/beginners_feet.tres")
+@onready var amulet = preload("res://Scripts/accessory/beginners_amulet.tres")
+@onready var earring = preload("res://Scripts/accessory/beginners_earring.tres")
+@onready var ring = preload("res://Scripts/accessory/beginners_ring.tres")
+
+func level_up():	
 	level += 1
 	
 	verify_stats()
 
 func _ready():
+	inventory = [weapon, head, chest, legs, feet, amulet, earring, ring]
+	
 	max_cooldowns = [12.0, 16.0, 8.0, 6.0, 8.0, 0, 8]
 	level = 1
 	critical_chance = 0.10
@@ -54,10 +65,6 @@ func _ready():
 	damage_stat = DAMAGE_STAT.DEXTERITY
 	healing_stat = HEALING_STAT.WISDOM
 	passive_description = "You are more dexterous than the others!\nGain 10% base critical strike chance and 15% increased spell speed!"
-	#this will eventually be read in
-	#0 weapon 1 helm 2 chest 3 legs 4 feet 5 acc1 6 acc2 7 acc3
-	#inventory = [beginners_bow.new(), beginners_helm.new(), beginners_chest.new(), beginners_legs.new(),\
-	#beginners_feet.new(), beginners_amulet.new(), beginners_earring.new(),beginners_ring.new()]
 	
 	e_global_timer.wait_time = s_duration
 	e_global_timer.autostart = false
@@ -69,12 +76,10 @@ func _ready():
 	add_child(s_global_timer)
 	s_global_timer.connect("timeout", s_timeout)
 	
-	inventory = [high_level_bow.new(), high_level_helm.new(), high_level_chest.new(), high_level_legs.new(),\
-	high_level_feet.new(), high_level_amulet.new(), high_level_earring.new(),high_level_ring.new()]
-	
 	verify_stats()
 	
 	for i in range(59):
+		pass
 		inventory[0].upgrade()
 		inventory[1].upgrade()
 		inventory[2].upgrade()
@@ -85,7 +90,7 @@ func _ready():
 		inventory[7].upgrade()
 		level_up()
 		
-func verify_stats():
+func verify_stats():	
 	critical_chance = 0.10
 	critical_damage_mod = 2.0
 	spell_speed = 1.15

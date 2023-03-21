@@ -1,4 +1,5 @@
-class_name accessory extends Node
+extends Resource
+class_name Accessory
 
 enum TYPE {
 	AMULET,
@@ -6,17 +7,30 @@ enum TYPE {
 	EARRING
 }
 
-var acc_id:int
-var acc_name:String
-var acc_type:TYPE
+const min_main = 30
+const max_main = 60
+const min_con = 50
+const max_con = 65
+
+@export_group("Information")
+@export var _id:int
+@export var _name:String
+@export var acc_type:TYPE
+var level: int
+
+@export_group("Stats")
 var main_stat_increase: int #between 30 and 60
 var constitution_increase: int # between 50 and 65
-var main_stat_mod: float = 20
+var main_stat_mod: float = 25
 var con_mod: float = 20
-var main_stat_base: int
-var con_stat_base: int
-var perks: Array
-var level: int
+@export_range(min_main, max_main, 1) var main_stat_base: int = 30
+@export_range(min_con, max_con, 1) var con_stat_base: int = 50
+
+@export_group("Perks")
+@export var perks: Array
+
+func _init():
+	level = 1
 
 func upgrade():
 	level += 1
@@ -34,3 +48,4 @@ func acc_calc():
 	print("Accessory")	
 	print(main_stat_increase)
 	print(constitution_increase)
+

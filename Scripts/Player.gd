@@ -38,16 +38,11 @@ enum HEALING_STAT {
 #QUEUE INTERRUPT PRIORITY - DASH, MOVEMENT, SKILL
 #DASHING CLEARS THE QUEUE
 
+const num_of_stats = 7
+
 #Enums
 var _class = CLASS.DEFAULT #class type
 var _state = STATE.IDLE #current player state
-
-#weapon identification - eventually we will read this in
-var weapon: Weapon
-var helmet: Armor
-var chest: Armor
-var legs: Armor
-var feet: Armor
 
 #Arrays
 var cooldowns = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0] #1-6 skills, 7 dash
@@ -75,7 +70,7 @@ var dash_direction
 var cooldown_reduction: float
 var critical_damage_mod: float
 var perks_list: Array
-var inventory: Array
+@export var inventory: Array
 var damage_mod: float
 var level: int
 var constitution: int
@@ -155,39 +150,52 @@ func CooldownManagement(t):
 		else:
 			pass
 			
-func perks_management():	
-	for i in range(inventory.size()):
-		if i == 0:
-			for j in range(2):
-				if inventory[i].perks[j].p_name == "Critical Prowess":
-					critical_chance += inventory[i].perks[j].critical_modifier + (level*\
-					inventory[i].perks[j].critical_mod_increase_per_level)
-					perks_list.append(inventory[i].perks[j].p_name)
-				elif inventory[i].perks[j].p_name == "Quickened Spell":
-					spell_speed += inventory[i].perks[j].spell_speed_modifier + (level*\
-					inventory[i].perks[j].spell_speed_increase_per_level)
-					damage_mod *= inventory[i].perks[j].damage_modifier + (level*\
-					inventory[i].perks[j].damage_mod_increase_per_level)
-					perks_list.append(inventory[i].perks[j].p_name)
-		elif i >= 1 and i <= 4:
-			if inventory[i].perks.p_name == "Critical Prowess":
-				critical_chance += inventory[i].perks.critical_modifier + (level*\
-				inventory[i].perks.critical_mod_increase_per_level)
-				perks_list.append(inventory[i].perks.p_name)
-			elif inventory[i].perks.p_name == "Precise Spells":
-				critical_damage_mod += inventory[i].perks.critical_dam_modifier + (level*\
-				inventory[i].perks.critical_dam_mod_increase_per_level)
-				perks_list.append(inventory[i].perks.p_name)
-		else:
-			for j in range(2):
-				if inventory[i].perks[j].p_name == "Swift Reload":
-					cooldown_reduction += inventory[i].perks[j].cdr_modifier + (level*\
-					inventory[i].perks[j].cdr_mod_increase_per_level)
-					perks_list.append(inventory[i].perks[j].p_name)
-				elif inventory[i].perks[j].p_name == "Expertise":
-					main_stat_mod += inventory[i].perks[j].main_stat_modifier + (level*\
-					inventory[i].perks[j].main_stat_mod_increase_per_level)
-					perks_list.append(inventory[i].perks[j].p_name)
+func perks_management():
+	for i in range(2):
+		damage_mod += inventory[0].perks[i].damage_modifier + (inventory[0].perks[i].damage_mod_increase_per_level * level)
+	
+	for i in range(2):
+		critical_damage_mod += inventory[0].perks[i].critical_dam_modifier + (inventory[0].perks[i].critical_dam_mod_increase_per_level * level)
+	
+	for i in range(2):
+		cooldown_reduction += inventory[0].perks[i].cdr_modifier + (inventory[0].perks[i].cdr_mod_increase_per_level * level)
+		
+	for i in range(2):
+		main_stat_mod += inventory[0].perks[i].main_stat_modifier + (inventory[0].perks[i].main_stat_mod_increase_per_level * level)
+		
+	for i in range(2):
+		critical_chance += inventory[0].perks[i].critical_modifier + (inventory[0].perks[i].critical_mod_increase_per_level * level)
+
+	for i in range(2):
+		spell_speed += inventory[0].perks[i].spell_speed_modifier + (inventory[0].perks[i].spell_speed_increase_per_level * level)
+		
+	for i in range(4):
+		damage_mod += inventory[i+1].perks.damage_modifier + (inventory[i+1].perks.damage_mod_increase_per_level * level)
+		critical_damage_mod += inventory[i+1].perks.critical_dam_modifier + (inventory[i+1].perks.critical_dam_mod_increase_per_level * level)
+		cooldown_reduction += inventory[i+1].perks.cdr_modifier + (inventory[i+1].perks.cdr_mod_increase_per_level * level)
+		main_stat_mod += inventory[i+1].perks.main_stat_modifier + (inventory[i+1].perks.main_stat_mod_increase_per_level * level)
+		critical_chance += inventory[i+1].perks.critical_modifier + (inventory[i+1].perks.critical_mod_increase_per_level * level)
+		spell_speed += inventory[i+1].perks.spell_speed_modifier + (inventory[i+1].perks.spell_speed_increase_per_level * level)
+		
+	for i in range(3):
+		for j in range(2):
+			damage_mod += inventory[i+5].perks[j].damage_modifier + (inventory[i+5].perks[j].damage_mod_increase_per_level * level)
+		
+		for j in range(2):
+			critical_damage_mod += inventory[i+5].perks[j].critical_dam_modifier + (inventory[i+5].perks[j].critical_dam_mod_increase_per_level * level)
+		
+		for j in range(2):
+			cooldown_reduction += inventory[i+5].perks[j].cdr_modifier + (inventory[i+5].perks[j].cdr_mod_increase_per_level * level)
+			
+		for j in range(2):
+			main_stat_mod += inventory[i+5].perks[j].main_stat_modifier + (inventory[i+5].perks[j].main_stat_mod_increase_per_level * level)
+			
+		for j in range(2):
+			critical_chance += inventory[i+5].perks[j].critical_modifier + (inventory[i+5].perks[j].critical_mod_increase_per_level * level)
+
+		for j in range(2):
+			spell_speed += inventory[i+5].perks[j].spell_speed_modifier + (inventory[i+5].perks[j].spell_speed_increase_per_level * level)
+		
 func CDR_Check():			
 	if cooldown_reduction > 0.60:
 		cooldown_reduction = 0.60

@@ -565,6 +565,7 @@ animations = [{
 position = Vector2(387, 151)
 collision_mask = 10
 script = ExtResource("1_w30ex")
+inventory = [null, null, null, null, null, null, null, null]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -22)

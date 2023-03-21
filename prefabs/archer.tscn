@@ -1,7 +1,7 @@
 [gd_scene load_steps=96 format=3 uid="uid://cmo6ytak1qhbj"]
 
 [ext_resource type="Script" path="res://Scripts/Archer/archer.gd" id="1_70rxr"]
-[ext_resource type="Texture2D" uid="uid://c6rgh81ig5ka0" path="res://sprites/Archer/ranger spritesheet calciumtrice.png" id="2_ysoe1"]
+[ext_resource type="Texture2D" uid="uid://c6rgh81ig5ka0" path="res://sprites/ranger spritesheet calciumtrice.png" id="2_ysoe1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kv6fv"]
 

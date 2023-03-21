@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="perk" load_steps=2 format=3 uid="uid://dksqla83e04jk"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/perk.gd" id="1_80gyp"]
+
+[resource]
+script = ExtResource("1_80gyp")
+_name = "Quickened Spells"
+p_description = "Increase the cast speed of your spells by 10-50% based on character level and the damage of your spells by 3-18% based on character level. This perk cannot stack. \\nWeapon Exclusive."
+damage_modifier = 0.03
+damage_mod_increase_per_level = 0.0025
+critical_dam_modifier = 0.0
+critical_dam_mod_increase_per_level = 0.0
+cdr_modifier = 0.0
+cdr_mod_increase_per_level = 0.0
+main_stat_modifier = 0.0
+main_stat_mod_increase_per_level = 0.0
+healing_modifier = 0.0
+healing_mod_increase_per_level = 0.0
+shielding_modifier = 0.0
+shielding_mod_increase_per_level = 0.0
+critical_modifier = 0.0
+critical_mod_increase_per_level = 0.0
+spell_speed_modifier = 0.1
+spell_speed_increase_per_level = 0.00667
+has_condition = false

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=4 format=3 uid="uid://dnoc31d0qfvvw"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/weapon.gd" id="1_l37wr"]
+[ext_resource type="Resource" uid="uid://c7x4vttpxilbg" path="res://Scripts/perks/general/critical_prowess.tres" id="1_ub3p0"]
+[ext_resource type="Resource" uid="uid://dksqla83e04jk" path="res://Scripts/perks/general/quickened_spell.tres" id="2_r5onw"]
+
+[resource]
+script = ExtResource("1_l37wr")
+_id = 0
+_name = "Beginner's Bow"
+base_weapon_quality = 50
+weapon_type = 0
+perks = [ExtResource("1_ub3p0"), ExtResource("2_r5onw")]
