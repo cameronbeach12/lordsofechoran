@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bjwwktx6t85n1"]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource type="Script" path="res://Scripts/Archer/LightTheTorch.gd" id="1_a43qj"]
+[ext_resource type="Script" path="res://prefabs/Abilities/light_the_torch/light_the_torch_instance.gd" id="1_a43qj"]
 [ext_resource type="Texture2D" uid="uid://b00fa07welo2f" path="res://sprites/Archer/LightTheTorch.png" id="2_my7f8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6cmrf"]

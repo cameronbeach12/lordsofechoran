@@ -8,11 +8,11 @@ enum TYPE {
 	FEET
 }
 #Change Bounds Here
-const min_stat: int = 50
-const max_stat: int = 75
+const min_stat: int = 150
+const max_stat: int = 225
 
-const min_con: int = 50
-const max_con: int = 80
+const min_con: int = 150
+const max_con: int = 240
 
 
 @export_group("Information")
@@ -34,11 +34,16 @@ var con_stat_mod: float = 15
 
 func _init():
 	level = 1
+	
+	armor_calc()
 
-func upgrade():
+func upgrade(s):
 	level += 1
 	
 	armor_calc()
+	
+	s.SetConstitution()
+	s.SetMainStat()
 		
 func armor_calc():
 	main_stat_increase = main_stat_base
@@ -48,6 +53,6 @@ func armor_calc():
 		main_stat_increase *= 1 + (60.0 / (540.0 + (60.0 + (i + 1.0) * main_stat_mod)))
 		constitution_increase *= 1 + (60.0 / (540.0 + (60.0 + (i + 1.0) * con_stat_mod)))
 	
-	print("Armor")	
-	print(main_stat_increase)
-	print(constitution_increase)
+	#print("Armor")	
+	#print(main_stat_increase)
+	#print(constitution_increase)

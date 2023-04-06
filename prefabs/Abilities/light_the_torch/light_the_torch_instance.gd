@@ -6,7 +6,7 @@ var crit_damage
 var damage_calc
 var max_time = .35
 var SPEED = 500
-@onready var EXPLOSION = preload("res://prefabs/ltt_explosion.tscn")
+@onready var EXPLOSION = preload("res://prefabs/Abilities/light_the_torch/ltt_explosion.tscn")
 @onready var animator = $AnimatedSprite2D
 
 # Called when the node enters the scene tree for the first time.

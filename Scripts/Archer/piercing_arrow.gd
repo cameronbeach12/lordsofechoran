@@ -1,20 +1,20 @@
 extends Area2D
 
 @onready var animator = $AnimatedSprite2D
-@onready var damageIndicator = preload("res://prefabs/damage_indicator.tscn")
+@onready var damageIndicator = preload("res://prefabs/Objects/damage_indicator.tscn")
 var bonus_damage = 1.00
 var crit_chance
 var crit_damage
 var crit
 var damage_calc
 var direction
-var SPEED = 500
-var max_time = 0.35
+var distance = 150
+var speed = 500
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var timer = Timer.new()
-	timer.wait_time = max_time
+	timer.wait_time = float(distance) / speed
 	timer.autostart = true
 	add_child(timer)
 	timer.connect("timeout", on_timeout)
@@ -26,7 +26,7 @@ func on_timeout():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position += SPEED*delta*direction
+	position += speed*delta*direction
 
 func damage_calculation():
 	var random = randf_range(0, 1)

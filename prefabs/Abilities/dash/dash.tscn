@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbe88wy12bh1d"]
+
+[ext_resource type="Script" path="res://prefabs/Abilities/dash/dash.gd" id="1_glq1l"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_glq1l")

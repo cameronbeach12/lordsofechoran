@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwvbcvq8ri2o1"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://Levels/Enemy.gd" id="1_ytq86"]
-[ext_resource type="PackedScene" uid="uid://bumylcyheki8w" path="res://prefabs/enemy_health_bar.tscn" id="2_bogkv"]
+[ext_resource type="PackedScene" uid="uid://bumylcyheki8w" path="res://prefabs/Objects/enemy_health_bar.tscn" id="2_bogkv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xwq8l"]
 

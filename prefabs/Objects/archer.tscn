@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmo6ytak1qhbj"]
+
+[ext_resource type="Script" path="res://prefabs/Objects/archer.gd" id="1_a7joi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fslu4"]
+
+[node name="Archer" type="CharacterBody2D"]
+collision_mask = 26
+script = ExtResource("1_a7joi")
+
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fslu4")
+
+[node name="Camera" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="DevText" type="RichTextLabel" parent="Camera"]
+offset_left = -288.0
+offset_top = -162.0
+offset_right = -137.0
+offset_bottom = 86.0
+metadata/_edit_use_anchors_ = true

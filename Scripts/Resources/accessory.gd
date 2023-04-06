@@ -7,16 +7,16 @@ enum TYPE {
 	EARRING
 }
 
-const min_main = 30
-const max_main = 60
-const min_con = 50
-const max_con = 65
+const min_main = 90
+const max_main = 180
+const min_con = 150
+const max_con = 195
 
 @export_group("Information")
 @export var _id:int
 @export var _name:String
 @export var acc_type:TYPE
-var level: int
+var level: int # max 20
 
 @export_group("Stats")
 var main_stat_increase: int #between 30 and 60
@@ -31,11 +31,16 @@ var con_mod: float = 20
 
 func _init():
 	level = 1
+	
+	acc_calc()
 
-func upgrade():
+func upgrade(s):
 	level += 1
 	
 	acc_calc()
+	
+	s.SetConstitution()
+	s.SetMainStat()
 		
 func acc_calc():
 	main_stat_increase = main_stat_base
@@ -45,7 +50,7 @@ func acc_calc():
 		main_stat_increase *= 1 + (60.0 / (540.0 + (60.0 + (i + 1.0) * main_stat_mod)))
 		constitution_increase *= 1 + (60.0 / (540.0 + (60.0 + (i + 1.0) * con_mod)))
 	
-	print("Accessory")	
-	print(main_stat_increase)
-	print(constitution_increase)
+	#print("Accessory")	
+	#print(main_stat_increase)
+	#print(constitution_increase)
 

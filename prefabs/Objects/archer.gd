@@ -1,0 +1,2 @@
+extends player_class
+class_name Archer

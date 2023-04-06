@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://swcwiq6a3ajt"]
+
+[ext_resource type="Script" path="res://prefabs/Abilities/light_the_torch/light_the_torch.gd" id="1_urwkj"]
+
+[node name="light_the_torch" type="Node"]
+script = ExtResource("1_urwkj")

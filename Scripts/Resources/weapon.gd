@@ -9,8 +9,8 @@ enum TYPE {
 	GAUNTLETS
 }
 
-const min_mod = 50
-const max_mod = 75
+const min_mod = 150
+const max_mod = 225
 
 @export_group("Information")
 @export var _id:int
@@ -30,13 +30,17 @@ var multiplier = 25
 
 func _init():
 	level = 1
+	
+	weapon_qual_calc()
 
-func upgrade():
+func upgrade(s):
 	level += 1
 	
 	print("Weapon Level: %d" % level)
 	
 	weapon_qual_calc()
+	
+	s.SetAttackPower(weapon_quality)
 			
 func weapon_qual_calc():
 	print("My Base Weapon Quality %d" % base_weapon_quality)
@@ -46,5 +50,5 @@ func weapon_qual_calc():
 	for i in range(level):
 		weapon_quality *= 1 + (60.0 / (540.0 + (60.0 + (i + 1.0) * multiplier)))
 		
-	print("Weapon")
-	print(weapon_quality)
+	#print("Weapon")
+	#print(weapon_quality)

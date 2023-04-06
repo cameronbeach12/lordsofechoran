@@ -1,7 +1,7 @@
 extends Area2D
 
 @onready var animator = $AnimatedSprite2D
-@onready var damageIndicator = preload("res://prefabs/damage_indicator.tscn")
+@onready var damageIndicator = preload("res://prefabs/Objects/damage_indicator.tscn")
 var activated
 var bonus_damage = 1.35
 var crit_chance

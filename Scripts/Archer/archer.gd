@@ -78,7 +78,7 @@ func _ready():
 	
 	verify_stats()
 	
-	for i in range(59):
+	for i in range(19):
 		pass
 		inventory[0].upgrade()
 		inventory[1].upgrade()

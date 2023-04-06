@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd7813nxh3k58"]
-
-[ext_resource type="Script" path="res://Scripts/Weapons/Physical/pistol.gd" id="1_ycdrd"]
-
-[node name="pistol" type="AnimatedSprite2D"]
-script = ExtResource("1_ycdrd")
