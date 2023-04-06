@@ -3,6 +3,7 @@ class_name Ability
 
 var timer: Timer
 var instance
+var max_cooldown
 var cooldown
 var damage
 var is_on_cooldown: bool = false

@@ -8,6 +8,6 @@
 script = ExtResource("1_l37wr")
 _id = 0
 _name = "Beginner's Bow"
-base_weapon_quality = 75
+base_weapon_quality = 150
 weapon_type = 0
 perks = [ExtResource("1_ub3p0"), ExtResource("2_r5onw")]

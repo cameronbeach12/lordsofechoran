@@ -2,14 +2,19 @@ extends Ability
 
 func _ready():
 	instance = load("res://prefabs/Abilities/flame_grenade/flame_grenade_instance.tscn")
-	cooldown = 18.0
+	max_cooldown = 18.0
+	cooldown = max_cooldown
 	damage = 900
 	
 	SetTimer()
 
 func execute(s):
 	is_on_cooldown = true
+	
+	timer.wait_time = max_cooldown * (1 - s.cooldown_reduction)
 	timer.start()
+	
+	print(timer.wait_time)
 	
 	var create = instance.instantiate()
 	create.target = s.get_global_mouse_position()

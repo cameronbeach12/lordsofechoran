@@ -30,7 +30,7 @@ var con_modifier: float
 var attack_power: int
 var main_stat: int
 var main_stat_modifier: float
-var critical_chance: int
+var critical_chance: float
 var critical_damage: float
 var cooldown_reduction: float
 var spell_speed: float
