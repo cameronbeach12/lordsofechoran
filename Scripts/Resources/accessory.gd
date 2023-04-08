@@ -40,6 +40,7 @@ func upgrade(s):
 	acc_calc()
 	
 	s.SetConstitution()
+	s.SetMaxHealth()
 	s.SetMainStat()
 		
 func acc_calc():

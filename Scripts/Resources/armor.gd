@@ -43,6 +43,7 @@ func upgrade(s):
 	armor_calc()
 	
 	s.SetConstitution()
+	s.SetMaxHealth()
 	s.SetMainStat()
 		
 func armor_calc():

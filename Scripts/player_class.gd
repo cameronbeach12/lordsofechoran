@@ -3,8 +3,8 @@ class_name player_class
 
 var move: Node = LoadAbility("move")
 var dash: Node = LoadAbility("dash")
-var skill1: Node = LoadAbility("flame_grenade")
-var skill2: Node = LoadAbility("light_the_torch")
+var skill1: Node
+var skill2: Node
 var skill3: Node
 var skill4: Node
 var skill5: Node
@@ -12,16 +12,25 @@ var skill6: Node
 
 var inventory = [Weapon, Armor, Armor, Armor, Armor, Accessory, Accessory, Accessory]
 
-@onready var weapon : Weapon = preload("res://Scripts/Weapons/Physical/beginners_bow.tres")
-@onready var head : Armor = preload("res://Scripts/Armor/beginners_helm.tres")
-@onready var chest : Armor = preload("res://Scripts/Armor/beginners_chest.tres")
-@onready var legs : Armor = preload("res://Scripts/Armor/beginners_legs.tres")
-@onready var feet : Armor = preload("res://Scripts/Armor/beginners_feet.tres")
-@onready var amulet : Accessory = preload("res://Scripts/accessory/beginners_amulet.tres")
-@onready var earring : Accessory = preload("res://Scripts/accessory/beginners_earring.tres")
-@onready var ring : Accessory = preload("res://Scripts/accessory/beginners_ring.tres")
+@onready var weapon : Weapon
+@onready var head : Armor
+@onready var chest : Armor
+@onready var legs : Armor
+@onready var feet : Armor
+@onready var amulet : Accessory
+@onready var earring : Accessory
+@onready var ring : Accessory
 
-func _ready():
+func LoadWeapon(weapon_name):
+	return load("res://Scripts/Weapons/" + weapon_name + ".tres")
+
+func LoadArmor(armor_name):
+	return load("res://Scripts/Armor/" + armor_name + ".tres")
+
+func LoadAccessory(acc_name):
+	return load("res://Scripts/accessory/" + acc_name + ".tres")
+
+func GetReady():
 	inventory[0] = weapon
 	inventory[1] = head
 	inventory[2] = chest
@@ -33,29 +42,7 @@ func _ready():
 	
 	level = 1
 	
-	constitution = 400
-	
-	health_regen = 50
-	mana_regen = 50
-	
-	speed = 150
-	dash_distance = 75
-	dash_speed = dash_distance * (speed / 30)
-	dash_timer = Timer.new()
-	
-	endurance = 1000
-	endurance_mod = 1.0
-	
-	main_stat = 400
-	main_stat_modifier = 1.0
-	critical_chance = 0 
-	critical_damage = 2.0 
-	cooldown_reduction = 0.0 
-	spell_speed = 1.0 
-	speed_modifier = 1.0 
-	damage_modifier = 1.0
-	healing_modifier = 1.0
-	shielding_modifier = 1.0
+	SetStats()
 	
 	is_busy = false
 	is_dashing = false
@@ -76,46 +63,10 @@ func _ready():
 	else:
 		SetAttackPower(inventory[0].weapon_quality)
 	perks()
-	
-	for i in range(59):
-		level_up()
-		
-	for i in range(19):
-		inventory[0].upgrade(self)
-		inventory[1].upgrade(self)
-		inventory[2].upgrade(self)
-		inventory[3].upgrade(self)
-		inventory[4].upgrade(self)
-		inventory[5].upgrade(self)
-		inventory[6].upgrade(self)
-		inventory[7].upgrade(self)
-		
-	log_stats()
 
 func SetStats():
-	constitution = 400
-	
-	health_regen = 50
-	mana_regen = 50
-	
-	speed = 150
-	dash_distance = 75
-	dash_speed = dash_distance * (speed / 30)
-	dash_timer = Timer.new()
-	
-	endurance = 1000
-	endurance_mod = 1.0
-	
-	main_stat = 400
-	main_stat_modifier = 1.0
-	critical_chance = 0.0
-	critical_damage = 2.0 
-	cooldown_reduction = 0.0 
-	spell_speed = 1.0 
-	speed_modifier = 1.0 
-	damage_modifier = 1.0
-	healing_modifier = 1.0
-	shielding_modifier = 1.0
+	#done by class
+	pass
 	
 func SetConstitution():
 	constitution = (400 + inventory[1].constitution_increase + inventory[2].constitution_increase \
@@ -167,7 +118,6 @@ func perks():
 		
 	for i in range(2):
 		critical_chance = 0.0 + inventory[0].perks[i].critical_modifier + (inventory[0].perks[i].critical_mod_increase_per_level * level)
-		print(critical_chance)
 
 	for i in range(2):
 		spell_speed = 1.0 + inventory[0].perks[i].spell_speed_modifier + (inventory[0].perks[i].spell_speed_increase_per_level * level)
@@ -240,8 +190,13 @@ func check_input():
 	for i in range(6):
 		if Input.is_action_just_pressed("skill" + str(i+1)):
 			is_casting = true
+			Animate(i+1)
 			PerformSkill(i+1)
-		
+
+func Animate(skill_num):
+	#written by class
+	pass
+	
 func _physics_process(delta):
 	if (!is_dashing):
 		velocity = Vector2()
@@ -255,13 +210,30 @@ func _physics_process(delta):
 	move_and_slide()
 	
 func PerformSkill(skill_num: int):
-
 	if skill_num == 1:
-		if not skill1.is_on_cooldown:
-			skill1.execute(self)
+		if skill1 != null:
+			if not skill1.is_on_cooldown:
+				skill1.execute(self)
 	if skill_num == 2:
-		if not skill2.is_on_cooldown:
-			skill2.execute(self)
+		if skill2 != null:
+			if not skill2.is_on_cooldown:
+				skill2.execute(self)
+	if skill_num == 3:
+		if skill3 != null:
+			if not skill3.is_on_cooldown:
+				skill3.execute(self)
+	if skill_num == 4:
+		if skill4 != null:
+			if not skill4.is_on_cooldown:
+				skill4.execute(self)
+	if skill_num == 5:
+		if skill5 != null:
+			if not skill5.is_on_cooldown:
+				skill5.execute(self)
+	if skill_num == 6:
+		if skill6 != null:
+			if not skill6.is_on_cooldown:
+				skill6.execute(self)
 	
 func SetDashing():
 	#dash object timer start
@@ -273,12 +245,7 @@ func SetDashing():
 	is_dashing = true
 	dash_timer.start()
 	
-func DashTimeout():	
+func DashTimeout():
 	is_dashing = false
 	
 	dash_timer.stop()
-		
-
-	
-	
-		

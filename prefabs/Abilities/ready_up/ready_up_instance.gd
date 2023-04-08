@@ -7,7 +7,7 @@ var crit_damage
 var damage_calc
 var max_time = .35
 var SPEED = 500
-@onready var damageIndicator = preload("res://prefabs/damage_indicator.tscn")
+@onready var damageIndicator = preload("res://prefabs/Objects/damage_indicator.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,15 +27,18 @@ func on_timeout():
 func damage_calculation():
 	var random = randf_range(0, 1)
 	
+	print(random)
+	
 	if crit_chance >= random:
 		crit = true
 		return (crit_damage * (damage_calc))
 	else:
 		crit = false
 		return damage_calc
+		
 	
 func _on_body_entered(body):
-	var damage = damage_calc
+	var damage = damage_calculation()
 	
 	body.damage(damage)
 	

@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://djclybr6d6qs6"]
+[gd_scene load_steps=5 format=3 uid="uid://onrrdtt5dfml"]
 
-[ext_resource type="Script" path="res://Scripts/Archer/ready_up.gd" id="1_7xkva"]
+[ext_resource type="Script" path="res://prefabs/Abilities/ready_up/ready_up_instance.gd" id="1_7xkva"]
 [ext_resource type="Texture2D" uid="uid://c1dat1frqksjr" path="res://sprites/Archer/piercing_arrow.png" id="1_xuswk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ctw7y"]

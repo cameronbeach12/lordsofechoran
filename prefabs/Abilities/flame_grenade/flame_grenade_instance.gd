@@ -11,6 +11,8 @@ var distance = 150
 var explosion_time = 5.0
 var health = 1
 
+var timer
+
 var explosion = preload("res://prefabs/Abilities/flame_grenade/fg_explosion.tscn")
 @onready var animator = $AnimatedSprite2D
 
@@ -24,7 +26,7 @@ func _ready():
 	add_child(explosion_timer)
 	explosion_timer.connect("timeout", explosion_on_timeout)
 	
-	var timer = Timer.new()
+	timer = Timer.new()
 	timer.wait_time = float(distance) / speed
 	timer.autostart = true
 	add_child(timer)
@@ -67,6 +69,6 @@ func explosion_on_timeout():
 	explode(false)
 	
 func on_timeout():
-	print("timeout")
+	timer.stop()
 	
 	can_move = false

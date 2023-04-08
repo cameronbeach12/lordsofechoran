@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://71hxddh85ijo"]
+
+[ext_resource type="Script" path="res://prefabs/Abilities/ready_up/ready_up.gd" id="1_87p7s"]
+
+[node name="ready_up" type="Node"]
+script = ExtResource("1_87p7s")

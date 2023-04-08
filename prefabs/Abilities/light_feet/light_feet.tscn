@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhymjelgksgu6"]
+
+[ext_resource type="Script" path="res://prefabs/Abilities/light_feet/light_feet.gd" id="1_38tb1"]
+
+[node name="light_feet" type="Node"]
+script = ExtResource("1_38tb1")

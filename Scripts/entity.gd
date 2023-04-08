@@ -49,13 +49,10 @@ var max_cooldowns: Array
 var level: int
 
 func IncreaseEndurance():
-	endurance += 100 * endurance_mod
+	endurance += 500 * endurance_mod
 
 func SetConstitutionMod():
 	con_modifier = maxf(0.5, float(endurance)/1000)
-	
-func SetEnduranceMod():
-	endurance_mod = con_modifier
 
 func SetHP():
 	health = max_health

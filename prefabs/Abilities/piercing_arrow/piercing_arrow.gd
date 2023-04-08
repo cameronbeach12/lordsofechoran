@@ -1,10 +1,10 @@
 extends Ability
 
 func _ready():
-	instance = load("res://prefabs/Abilities/light_the_torch/light_the_torch_instance.tscn")
-	max_cooldown = 9.0
+	instance = load("res://prefabs/Abilities/piercing_arrow/piercing_arrow_instance.tscn")
+	max_cooldown = 2.0
 	cooldown = max_cooldown
-	damage = 900
+	damage = 300
 	
 	SetTimer()
 
@@ -24,4 +24,3 @@ func execute(s):
 	create.look_at(s.get_global_mouse_position())
 	
 	get_node("/root").add_child(create)
-

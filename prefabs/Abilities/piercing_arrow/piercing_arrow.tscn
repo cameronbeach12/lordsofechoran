@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://crh6dx7g7ex1u"]
+
+[ext_resource type="Script" path="res://prefabs/Abilities/piercing_arrow/piercing_arrow.gd" id="1_3krw4"]
+
+[node name="piercing_arrow" type="Node"]
+script = ExtResource("1_3krw4")

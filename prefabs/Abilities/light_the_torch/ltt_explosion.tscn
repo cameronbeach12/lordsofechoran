@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3]
+[gd_scene load_steps=27 format=3 uid="uid://bydklpd47irvd"]
 
 [ext_resource type="Script" path="res://prefabs/Abilities/light_the_torch/ltt_explosion.gd" id="1_h6nb1"]
 [ext_resource type="Texture2D" uid="uid://bcocdpicghda8" path="res://sprites/Archer/explosionLTT.png" id="1_m7xpt"]
@@ -168,6 +168,7 @@ animations = [{
 }]
 
 [node name="LTTExplosion" type="Area2D"]
+scale = Vector2(1.5, 1.5)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_h6nb1")
