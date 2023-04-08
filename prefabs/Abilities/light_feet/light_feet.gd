@@ -24,7 +24,7 @@ func _ready():
 	
 	SetTimer()
 	
-	dash_distance = 25
+	dash_distance = 50
 	
 	dash_timer = Timer.new()
 	dash_timer.autostart = false
@@ -40,7 +40,7 @@ func execute(s):
 	
 	buff_timer.start()
 	
-	dash_timer.wait_time = float(dash_distance)/s.dash_speed
+	dash_timer.wait_time = float(dash_distance)/(s.dash_speed * buff_speed)
 	
 	dash_timer.start()
 	
