@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=7 format=3 uid="uid://cgtmrheogra6f"]
 
 [ext_resource type="Script" path="res://prefabs/Abilities/flame_grenade/flame_grenade_instance.gd" id="1_krfrq"]
 [ext_resource type="Texture2D" uid="uid://dr1a7n313k68e" path="res://sprites/Archer/flame_grenade1.png" id="2_dic2l"]
 [ext_resource type="Texture2D" uid="uid://e1nin68d2qeu" path="res://sprites/Archer/flame_grenade2.png" id="3_gwvkq"]
 [ext_resource type="Texture2D" uid="uid://xd1ons8a6fxl" path="res://sprites/Archer/flame_grenade3.png" id="4_wmmf5"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_xtoat"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_jsqpk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -19,19 +19,19 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 0.6
+"speed": 2.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ahp82"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_t12lu"]
 
-[node name="Flame Grenade" type="CharacterBody2D"]
+[node name="FlameGrenade" type="Area2D"]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_krfrq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_xtoat")
+sprite_frames = SubResource("SpriteFrames_jsqpk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.8, 0.8)
-shape = SubResource("CircleShape2D_ahp82")
+shape = SubResource("CircleShape2D_t12lu")

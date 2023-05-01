@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=17 format=3 uid="uid://cqt6cuibesw62"]
 
 [ext_resource type="Texture2D" uid="uid://bwa7x7wkepkb5" path="res://sprites/Archer/explosionFG.png" id="1_aqwe0"]
 [ext_resource type="Script" path="res://prefabs/Abilities/flame_grenade/fg_explosion.gd" id="1_paj2c"]

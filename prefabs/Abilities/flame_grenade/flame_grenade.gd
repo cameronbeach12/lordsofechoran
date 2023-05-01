@@ -4,7 +4,7 @@ func _ready():
 	instance = load("res://prefabs/Abilities/flame_grenade/flame_grenade_instance.tscn")
 	max_cooldown = 18.0
 	cooldown = max_cooldown
-	damage = 900
+	damage = 1400
 	
 	SetTimer()
 

@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Area2D
 
 var target
 var can_move
@@ -8,7 +8,7 @@ var damage_calc
 var direction
 var speed = 450
 var distance = 150
-var explosion_time = 5.0
+var explosion_time = 1.5
 var health = 1
 
 var timer
@@ -62,9 +62,6 @@ func explode(activated):
 	
 	self.queue_free()
 	
-func damage():
-	explode(true)
-
 func explosion_on_timeout():
 	explode(false)
 	

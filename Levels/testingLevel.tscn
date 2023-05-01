@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxgp1aogfsfgr"]
+[gd_scene load_steps=7 format=3 uid="uid://dxgp1aogfsfgr"]
 
 [ext_resource type="Texture2D" uid="uid://xi464jm0aek" path="res://tilesets/grass_tileset_16x16.png" id="1_5v835"]
-[ext_resource type="PackedScene" path="res://prefabs/Objects/enemy.tscn" id="3_b8kdd"]
+[ext_resource type="PackedScene" uid="uid://dxkkh6ft7iivc" path="res://prefabs/Objects/enemy.tscn" id="3_b8kdd"]
 [ext_resource type="PackedScene" uid="uid://cmo6ytak1qhbj" path="res://prefabs/Objects/archer.tscn" id="4_iqni8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l52a2"]
@@ -181,6 +181,11 @@ physics_layer_0/collision_layer = 16
 physics_layer_0/collision_mask = 15
 sources/0 = SubResource("TileSetAtlasSource_l52a2")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_xolm5"]
+vertices = PackedVector2Array(1070.03, 3.03526, 1071.06, 339.19, 145.631, 106.234, 144.598, 88.0225, 0, 339.949, 119.81, 105.475, 110.514, 69.0522, 109.481, 52.3582, 118.777, 88.0225, 46.4779, 45.5289, 45.4451, 28.0762, 85.7259, 51.5994, -4.13137, -1.51763, 20.6569, 27.3173, 19.624, 44.0113, 86.7588, 68.2934)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 1, 4, 5), PackedInt32Array(6, 7, 0, 3, 8), PackedInt32Array(9, 10, 0, 7, 11), PackedInt32Array(12, 0, 10, 13), PackedInt32Array(4, 12, 13, 14), PackedInt32Array(8, 5, 4, 14, 9, 15), PackedInt32Array(9, 11, 15), PackedInt32Array(8, 15, 6)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-4.13137, -1.51763, 1070.03, 3.03526, 1071.06, 339.19, 0, 339.949), PackedVector2Array(20.6569, 27.3173, 45.4451, 28.0762, 46.4779, 45.5289, 19.624, 44.0113), PackedVector2Array(85.7259, 51.5994, 86.7588, 68.2934, 110.514, 69.0522, 109.481, 52.3582), PackedVector2Array(118.777, 88.0225, 119.81, 105.475, 145.631, 106.234, 144.598, 88.0225)])
+
 [node name="Level" type="Node2D"]
 
 [node name="grassTiles" type="TileMap" parent="."]
@@ -197,17 +202,10 @@ layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array(262149, 262144, 0, 327685, 262144, 1, 262150, 327680, 0, 327686, 327680, 1, 458759, 262144, 0, 524295, 262144, 1, 458760, 327680, 0, 524296, 327680, 1, 131073, 262144, 0, 196609, 262144, 1, 131074, 327680, 0, 196610, 327680, 1)
 
 [node name="Enemy" parent="." instance=ExtResource("3_b8kdd")]
-
-[node name="Enemy2" parent="." instance=ExtResource("3_b8kdd")]
-position = Vector2(177, 57)
+position = Vector2(264, 119)
 
 [node name="Archer" parent="." instance=ExtResource("4_iqni8")]
 
-[node name="Enemy3" parent="." instance=ExtResource("3_b8kdd")]
-position = Vector2(188, 110)
-
-[node name="Enemy4" parent="." instance=ExtResource("3_b8kdd")]
-position = Vector2(148, 87)
-
-[node name="Enemy5" parent="." instance=ExtResource("3_b8kdd")]
-position = Vector2(204, 77)
+[node name="NavMesh" type="NavigationRegion2D" parent="."]
+scale = Vector2(0.968202, 1.31784)
+navigation_polygon = SubResource("NavigationPolygon_xolm5")

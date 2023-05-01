@@ -249,3 +249,8 @@ func DashTimeout():
 	is_dashing = false
 	
 	dash_timer.stop()
+	
+func TakeDamage(amount: int):
+	health -= amount
+	
+	print(health)

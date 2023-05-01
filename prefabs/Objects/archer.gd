@@ -1,7 +1,7 @@
 extends player_class
 class_name Archer
 
-func _ready():
+func _ready():	
 	skill1 = LoadAbility("light_the_torch")
 	skill2 = LoadAbility("flame_grenade")
 	skill3 = LoadAbility("ready_up")

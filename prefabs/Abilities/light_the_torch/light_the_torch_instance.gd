@@ -39,8 +39,6 @@ func explode():
 
 
 func _on_body_entered(body):
-	if body.name == "Flame Grenade":
-		body.damage()
-		return
+	print(body)
 	
 	explode()

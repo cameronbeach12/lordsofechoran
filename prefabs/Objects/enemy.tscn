@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=8 format=3 uid="uid://dxkkh6ft7iivc"]
 
 [ext_resource type="Script" path="res://Levels/Enemy.gd" id="1_ytq86"]
 [ext_resource type="PackedScene" uid="uid://bumylcyheki8w" path="res://prefabs/Objects/enemy_health_bar.tscn" id="2_bogkv"]
@@ -7,8 +7,13 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_phop2"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_4dwsq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0xdih"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1p53m"]
+
 [node name="Enemy" type="CharacterBody2D"]
-position = Vector2(146, 42)
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_ytq86")
@@ -29,3 +34,33 @@ shape = SubResource("CapsuleShape2D_phop2")
 offset_top = -20.0
 offset_right = 40.0
 offset_bottom = 20.0
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="PlayerDetectionRange" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="Range" type="CollisionShape2D" parent="PlayerDetectionRange"]
+scale = Vector2(25, 25)
+shape = SubResource("CircleShape2D_4dwsq")
+
+[node name="AttackTargetRange" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="Range" type="CollisionShape2D" parent="AttackTargetRange"]
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_0xdih")
+
+[node name="Attack" type="Area2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+collision_layer = 8
+
+[node name="Range" type="CollisionShape2D" parent="Attack"]
+shape = SubResource("CircleShape2D_1p53m")
+disabled = true
+
+[connection signal="body_entered" from="PlayerDetectionRange" to="." method="_on_player_detection_range_body_entered"]
+[connection signal="body_exited" from="PlayerDetectionRange" to="." method="_on_player_detection_range_body_exited"]
+[connection signal="body_entered" from="AttackTargetRange" to="." method="_on_attack_target_range_body_entered"]
+[connection signal="body_exited" from="AttackTargetRange" to="." method="_on_attack_target_range_body_exited"]
+[connection signal="body_entered" from="Attack" to="." method="_on_attack_body_entered"]
